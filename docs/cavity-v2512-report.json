@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "case_template": "cases/cavity",
+  "status": "passed",
+  "started_at": "2026-11-19T14:00:03+00:00",
+  "platform": "Windows",
+  "python_version": "3.12.10",
+  "stage_timeout_seconds": 30,
+  "max_retries": 0,
+  "openfoam": {
+    "project": "OpenFOAM",
+    "version": "v2512",
+    "version_source": "blockMesh -help",
+    "available": {
+      "blockMesh": true,
+      "checkMesh": true,
+      "icoFoam": true,
+      "foamRun": false
+    },
+    "requested_solver": "auto",
+    "selected_solver": "icoFoam",
+    "solver_module": null,
+    "version_probe": {
+      "stage": "version_probe",
+      "argv": [
+        "blockMesh.exe",
+        "-help"
+      ],
+      "log": "version.log",
+      "exit_code": 0,
+      "timed_out": false,
+      "retryable": false,
+      "diagnostics": [],
+      "duration_seconds": 0.015
+    }
+  },
+  "diagnostics": [],
+  "attempts": [
+    {
+      "number": 1,
+      "status": "passed",
+      "case": "attempt-01/case",
+      "stages": [
+        {
+          "stage": "blockMesh",
+          "argv": [
+            "blockMesh.exe",
+            "-case",
+            "."
+          ],
+          "log": "attempt-01/logs/01-blockMesh.log",
+          "exit_code": 0,
+          "timed_out": false,
+          "retryable": false,
+          "diagnostics": [],
+          "duration_seconds": 0.047,
+          "status": "passed"
+        },
+        {
+          "stage": "checkMesh",
+          "argv": [
+            "checkMesh.exe",
+            "-case",
+            "."
+          ],
+          "log": "attempt-01/logs/02-checkMesh.log",
+          "exit_code": 0,
+          "timed_out": false,
+          "retryable": false,
+          "diagnostics": [],
+          "duration_seconds": 0.047,
+          "mesh": {
+            "ok_marker": true,
+            "failed_checks": 0,
+            "cells": 400,
+            "max_aspect_ratio": 1.0,
+            "max_non_orthogonality_deg": 0.0,
+            "max_skewness": 1.6653345e-14,
+            "passed": true
+          },
+          "status": "passed"
+        },
+        {
+          "stage": "solver",
+          "argv": [
+            "icoFoam.exe",
+            "-noFunctionObjects",
+            "-case",
+            "."
+          ],
+          "log": "attempt-01/logs/03-icoFoam.log",
+          "exit_code": 0,
+          "timed_out": false,
+          "retryable": false,
+          "diagnostics": [],
+          "duration_seconds": 0.109,
+          "solver": {
+            "ended": true,
+            "last_time": 0.5,
+            "residuals": {
+              "Ux": {
+                "records": 100,
+                "first_initial": 1.0,
+                "last_initial": 2.3090967e-07,
+                "last_final": 2.3090967e-07,
+                "last_iterations": 0
+              },
+              "Uy": {
+                "records": 100,
+                "first_initial": 0.0,
+                "last_initial": 5.0683986e-07,
+                "last_final": 5.0683986e-07,
+                "last_iterations": 0
+              },
+              "p": {
+                "records": 200,
+                "first_initial": 1.0,
+                "last_initial": 9.5910276e-07,
+                "last_final": 9.5910276e-07,
+                "last_iterations": 0
+              }
+            }
+          },
+          "status": "passed"
+        }
+      ],
+      "block_mesh_version": null
+    }
+  ],
+  "finished_at": "2026-11-19T14:00:04+00:00"
+}

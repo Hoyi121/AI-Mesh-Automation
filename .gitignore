@@ -1,0 +1,24 @@
+# Generated runs can contain machine-specific paths in OpenFOAM logs.
+/runs/
+*.log
+core
+core.*
+
+# Outputs from invoking OpenFOAM directly on the reference case.
+/cases/cavity/constant/polyMesh/
+/cases/cavity/0.*/
+/cases/cavity/[1-9]*/
+/cases/cavity/postProcessing/
+/cases/cavity/processor*/
+/cases/cavity/dynamicCode/
+
+# Local Python, editor and environment files.
+__pycache__/
+*.py[cod]
+.coverage
+.pytest_cache/
+.venv/
+.env
+.env.*
+.idea/
+.vscode/
